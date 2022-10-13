@@ -1,63 +1,66 @@
 ﻿/*
-13. Напишите метод, который выводит третью цифру заданного
-числа или сообщает, что третьей цифры нет.
-
-Понимаю, что можно сделать и проще через строку, но решил в методе
-пользоваться чистой арифметикой
-
+13. Выяснить, кратно ли число заданному, если нет, вывести остаток.
 
 Автор: Трофимов П.А.
 
 */
 
 //Методы:
-//Ввод чисел
-int InputNumbers(string text)
+
+bool CheckNumber(string N)
 {
-    bool Condition = true;
-    int number = 0;
-    while (Condition)
+    return int.TryParse(N, out int number);
+}
+
+
+string IsEven(string number1, string number2)
+{
+    string result;
+    if (CheckNumber(number1) && CheckNumber(number2))
     {
-        Console.Write(text);
-        if (int.TryParse(Console.ReadLine(), out number))
+        int N1 = int.Parse(number1);
+        int N2 = int.Parse(number2);
+        if (N1 >= N2)
         {
-            Condition = false;
+            if (N1 % N2 == 0)
+            {
+                result = "true";
+                return result;
+            }
+
+            else
+            {
+                result = $"{N1 % N2}";
+                return result;
+            }
         }
         else
         {
-            Console.WriteLine("Введенный символ не является числом!");
-        }
-    }
-return number;
-}
+            if (N2 % N1 == 0)
+            {
+                result = "true";
+                return result;
+            }
 
-//Вывод третьей цифры
-void ThirdDigit(int number)
-{
-    if (number % 100 == number)
-    {
-        Console.WriteLine($"В числе {number} нет третьей цифры");
+            else
+            {
+                result = $"{N2 % N1}";
+                return result;
+            }
+        }
     }
     else
     {
-        while (true)
-        {
-            int digit = number % 10;
-            if (number % 1000 == number)
-            {
-                Console.WriteLine($"Третья цифра - {digit}");
-                break;
-            }
-            else
-            {
-                number /= 10;
-            }
-        }
+        result = "Неправильный ввод. Введите целые числа.";
+        return result;
     }
 }
 
-
 //Программа
 
-int N = InputNumbers("Введите число: ");
-ThirdDigit(N);
+int Nbig = 25;
+int Nsmall = 6;
+
+Console.WriteLine(IsEven($"{Nbig}", $"{Nsmall}"));
+
+
