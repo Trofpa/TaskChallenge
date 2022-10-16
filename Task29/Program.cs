@@ -30,12 +30,8 @@ int InputNumber(string text)
 
 int Fact(int number)
 {
-    int fact = 1;
-    for (int i = 2; i < number + 1; i++)
-    {
-        fact *= i;
-    }
-    return fact;
+    if(number == 1 || number == 0) return 1;
+    else return number * Fact(number - 1);
 }
 
 //Программа
